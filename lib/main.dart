@@ -1,9 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:habit_tracker/pages/home_page.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 
-void main(){
+void main() async {
+  // Inicializar Hive
+  await Hive.initFlutter();
+
+  // Abrir el amacenamiento de datos
+  await Hive.openBox(("Habit_Database"));
+
   runApp(const MyApp());
 }
+
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
