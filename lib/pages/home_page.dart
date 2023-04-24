@@ -13,8 +13,6 @@ class _HomePageState extends State<HomePage> {
   // Lista de habitos
   List todaysHabitList = [
     // [habitName, habitCompleted]
-    ["Leer", false],
-    ["Salir a trotar", false],
   ];
 
   // Combrobación para el checkbox
@@ -32,6 +30,7 @@ class _HomePageState extends State<HomePage> {
       builder: (context) {
         return MyAlertBox(
           controller: _newHabitNameController,
+          hintText: "Ingresa el hábito...",
           onCancel: cancelarDialogBox,
           onSave: GuardarNuevoHabito,
         );
@@ -66,16 +65,20 @@ class _HomePageState extends State<HomePage> {
       builder: (context) {
         return MyAlertBox(
           controller: _newHabitNameController,
+          hintText: todaysHabitList[index][0],
           onSave: () => guardarExistingHabit(index),
           onCancel: cancelarDialogBox,
         );
     },);
   }
 
+  // Cambiar el nombre de un habito ya existente
   void guardarExistingHabit(int index) {
     setState(() {
       todaysHabitList[index][0] = _newHabitNameController.text;
     });
+    _newHabitNameController.clear();
+    Navigator.pop(context);
   }
 
   void borrarHabito(int index) {
